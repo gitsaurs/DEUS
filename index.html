@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEUS — Where Faith Meets the Digital Age</title>
+  <meta name="description" content="DEUS is the ultimate Christian platform — AI spiritual companion, sacred news, holy products, prayer community, and more. Begin your divine journey today." />
+  <meta name="keywords" content="Christianity, Christian app, Bible, prayer, faith, Jesus, devotional, Christian products, sacred places, DEUS" />
+  <meta name="author" content="DEUS Platform" />
+  <meta property="og:title" content="DEUS — Where Faith Meets the Digital Age" />
+  <meta property="og:description" content="The all-in-one Christian platform for the modern believer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://deusplatform.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://deusplatform.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-pale: #F5E6C0;
+      --ivory: #FAF6EE;
+      --deep: #0A0705;
+      --deep-2: #120E08;
+      --brown: #2A1F10;
+      --brown-mid: #4A3520;
+      --text-dim: #8A7A65;
+      --text-mid: #C4B49A;
+      --crimson: #8B1A1A;
+      --crimson-glow: rgba(139,26,26,0.3);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--deep);
+      color: var(--ivory);
+      font-family: 'EB Garamond', serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 40px; height: 40px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+      opacity: 0.6;
+    }
+    .cursor-ring.hovered { width: 60px; height: 60px; opacity: 0.3; border-width: 2px; }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--deep); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* TYPOGRAPHY */
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-cinzel-deco { font-family: 'Cinzel Decorative', serif; }
+    .font-garamond { font-family: 'EB Garamond', serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+
+    /* GOLD GRADIENT TEXT */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #C9A84C 0%, #F5E6C0 40%, #C9A84C 60%, #A07830 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-gold { color: var(--gold); }
+    .text-ivory { color: var(--ivory); }
+    .text-dim { color: var(--text-dim); }
+    .text-mid { color: var(--text-mid); }
+
+    /* GLOWING BORDER */
+    .border-gold { border-color: var(--gold); }
+    .glow-gold { box-shadow: 0 0 30px rgba(201,168,76,0.3); }
+    .glow-gold-text { text-shadow: 0 0 40px rgba(201,168,76,0.5); }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.5s ease;
+    }
+    nav.scrolled {
+      background: rgba(10,7,5,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 16px 48px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      background: linear-gradient(135deg, #C9A84C, #F5E6C0, #C9A84C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 100%;
+      height: 1px;
+      background: var(--gold);
+      transition: right 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { right: 0; }
+    .btn-nav {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      cursor: none;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform 0.4s ease;
+    }
+    .btn-nav:hover::before { transform: translateX(0); }
+    .btn-nav:hover { color: var(--deep); }
+    .btn-nav span { position: relative; z-index: 1; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(139,26,26,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 80% 70%, rgba(201,168,76,0.05) 0%, transparent 50%);
+    }
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .hero-lines::before, .hero-lines::after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 30%, rgba(201,168,76,0.3) 70%, transparent);
+    }
+    .hero-lines::before { left: 15%; }
+    .hero-lines::after { right: 15%; }
+
+    .hero-content {
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      padding: 0 24px;
+      max-width: 1000px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      opacity: 0;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(64px, 12vw, 140px);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      opacity: 0;
+    }
+    .hero-subtitle-latin {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(14px, 2vw, 20px);
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 40px;
+      opacity: 0;
+    }
+    .hero-desc {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: var(--text-mid);
+      max-width: 600px;
+      margin: 0 auto 56px;
+      line-height: 1.7;
+      opacity: 0;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+
+    .btn-primary {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 18px 48px;
+      background: linear-gradient(135deg, #C9A84C, #A07830);
+      color: var(--deep);
+      border: none;
+      cursor: none;
+      text-decoration: none;
+      font-weight: 700;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: inline-block;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #F5E6C0, #C9A84C);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 60px rgba(201,168,76,0.4); }
+    .btn-primary span { position: relative; z-index: 1; }
+
+    .btn-secondary {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 18px 48px;
+      background: transparent;
+      color: var(--ivory);
+      border: 1px solid rgba(201,168,76,0.4);
+      cursor: none;
+      text-decoration: none;
+      transition: all 0.4s;
+      display: inline-block;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.05);
+    }
+
+    /* CROSS ORNAMENT */
+    .cross-ornament {
+      position: absolute;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    /* FLOATING VERSES */
+    .verse-float {
+      position: absolute;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 12px;
+      color: var(--gold);
+      opacity: 0.25;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+    }
+    .scroll-indicator span {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* MARQUEE */
+    .marquee-section {
+      padding: 24px 0;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      overflow: hidden;
+      background: rgba(201,168,76,0.03);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 80px;
+      animation: marquee 30s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+    .marquee-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* SECTION BASE */
+    section { position: relative; }
+    .section-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .section-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .section-body {
+      font-family: 'EB Garamond', serif;
+      font-size: 18px;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* STATS BAR */
+    .stats-section {
+      padding: 100px 0;
+      background: linear-gradient(to right, rgba(201,168,76,0.05) 0%, transparent 50%, rgba(201,168,76,0.05) 100%);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+    .stat-item::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(201,168,76,0.2);
+    }
+    .stat-item:last-child::after { display: none; }
+    .stat-number {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* FEATURES */
+    .features-section { padding: 140px 0; }
+    .features-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      cursor: none;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+    }
+    .feature-card.featured {
+      background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.03));
+      border-color: rgba(201,168,76,0.4);
+      grid-row: span 2;
+    }
+    .feature-icon {
+      width: 56px; height: 56px;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      font-size: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .feature-card:hover .feature-icon {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.3);
+    }
+    .feature-name {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .feature-desc {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .feature-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    /* QUOTE SECTION */
+    .quote-section {
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    }
+    .quote-text {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(24px, 4vw, 48px);
+      color: var(--ivory);
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.4;
+      position: relative;
+      z-index: 1;
+    }
+    .quote-mark {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 120px;
+      line-height: 0.5;
+      color: var(--gold);
+      opacity: 0.2;
+      display: block;
+    }
+    .quote-source {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 32px;
+    }
+
+    /* PRICING */
+    .pricing-section { padding: 140px 0; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1000px;
+      margin: 80px auto 0;
+    }
+    .pricing-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 56px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s;
+      cursor: none;
+    }
+    .pricing-card.popular {
+      background: linear-gradient(160deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.03) 100%);
+      border-color: var(--gold);
+      transform: scaleY(1.03);
+      z-index: 2;
+    }
+    .pricing-card:hover:not(.popular) {
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(201,168,76,0.04);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      background: var(--gold);
+      color: var(--deep);
+      font-weight: 700;
+    }
+    .pricing-tier {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+    }
+    .pricing-amount {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-period {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 40px;
+    }
+    .pricing-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(201,168,76,0.3);
+      margin: 0 auto 32px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+    .pricing-features li {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: var(--text-mid);
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .pricing-features li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+    .pricing-features li.dim { color: var(--text-dim); }
+    .pricing-features li.dim::before { opacity: 0.3; }
+
+    /* GALLERY PREVIEW */
+    .gallery-section { padding: 140px 0; overflow: hidden; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      grid-template-rows: auto auto;
+      gap: 4px;
+      margin-top: 80px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+      background: var(--brown);
+    }
+    .gallery-item:first-child { grid-row: span 2; min-height: 500px; }
+    .gallery-item:not(:first-child) { min-height: 240px; }
+    .gallery-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+      display: block;
+    }
+    .gallery-item:hover .gallery-img { transform: scale(1.05); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,7,5,0.8) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-label {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ivory);
+    }
+    /* Placeholder images using CSS gradients */
+    .gallery-placeholder-1 { background: linear-gradient(135deg, #1a1008 0%, #3d2a12 40%, #1a1008 100%); position: relative; }
+    .gallery-placeholder-2 { background: linear-gradient(135deg, #2a1a08 0%, #4a3020 100%); }
+    .gallery-placeholder-3 { background: linear-gradient(135deg, #1a0808 0%, #3a1a1a 100%); }
+    .gallery-placeholder-4 { background: linear-gradient(135deg, #0a1208 0%, #1a2a18 100%); }
+    .gallery-placeholder-5 { background: linear-gradient(135deg, #1a1020 0%, #2a1a30 100%); }
+    .gallery-placeholder-6 { background: linear-gradient(135deg, #201208 0%, #3a2010 100%); }
+    .gallery-icon-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      opacity: 0.15;
+    }
+    .gallery-item:first-child .gallery-icon-overlay { font-size: 100px; }
+
+    /* TESTIMONIALS */
+    .testimonials-section { padding: 120px 0; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 80px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 48px 40px;
+      transition: all 0.5s;
+      cursor: none;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(201,168,76,0.3);
+      background: rgba(201,168,76,0.03);
+    }
+    .testimonial-stars {
+      color: var(--gold);
+      letter-spacing: 4px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .testimonial-text {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .testimonial-avatar {
+      width: 48px; height: 48px;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: rgba(201,168,76,0.08);
+    }
+    .testimonial-name {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: var(--ivory);
+      margin-bottom: 2px;
+    }
+    .testimonial-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* AI FEATURE */
+    .ai-section {
+      padding: 140px 0;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.04) 50%, transparent);
+    }
+    .ai-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+    .ai-chat-demo {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 32px;
+      position: relative;
+    }
+    .ai-chat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .ai-avatar {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--gold), #A07830);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .ai-name {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      color: var(--ivory);
+    }
+    .ai-status {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: #4ade80;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ai-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .chat-bubble {
+      margin-bottom: 16px;
+      max-width: 85%;
+    }
+    .chat-bubble.user { margin-left: auto; }
+    .chat-bubble-inner {
+      padding: 14px 18px;
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .chat-bubble.ai .chat-bubble-inner {
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--ivory);
+    }
+    .chat-bubble.user .chat-bubble-inner {
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--ivory);
+    }
+    .chat-verse {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .chat-input {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .chat-input input {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 12px 16px;
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      color: var(--ivory);
+      outline: none;
+    }
+    .chat-send {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--gold), #A07830);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      font-size: 16px;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 160px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 20%, rgba(139,26,26,0.08) 0%, transparent 60%);
+    }
+    .cta-ornament {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 50%;
+      animation: rotateSlow 20s linear infinite;
+    }
+    .cta-ornament::before {
+      content: '';
+      position: absolute;
+      inset: 40px;
+      border: 1px solid rgba(201,168,76,0.05);
+      border-radius: 50%;
+    }
+    @keyframes rotateSlow {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    .cta-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(36px, 6vw, 80px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-desc {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      color: var(--text-mid);
+      max-width: 500px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-trial {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--deep-2);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+    .footer-brand {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .footer-tagline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-dim);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+    .social-btn {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.3s;
+      cursor: none;
+      text-decoration: none;
+    }
+    .social-btn:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.1);
+    }
+    .footer-col-title {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-legal a:hover { color: var(--gold); }
+
+    /* MOBILE MENU */
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: none;
+      padding: 8px;
+    }
+    .mobile-menu-btn span {
+      width: 28px; height: 1.5px;
+      background: var(--gold);
+      transition: all 0.3s;
+    }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,7,5,0.97);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute;
+      top: 24px; right: 48px;
+      font-size: 28px;
+      color: var(--gold);
+      cursor: none;
+      background: none;
+      border: none;
+    }
+
+    /* REVEAL ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(40px); }
+    .reveal.visible { animation: revealUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .reveal-left { opacity: 0; transform: translateX(-40px); }
+    .reveal-left.visible { animation: revealLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .reveal-right { opacity: 0; transform: translateX(40px); }
+    .reveal-right.visible { animation: revealRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    @keyframes revealUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes revealLeft {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes revealRight {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* DELAY CLASSES */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+
+    /* STAGGER CHILDREN */
+    .stagger > * { opacity: 0; transform: translateY(30px); }
+    .stagger.visible > * {
+      animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .stagger.visible > *:nth-child(1) { animation-delay: 0.05s; }
+    .stagger.visible > *:nth-child(2) { animation-delay: 0.15s; }
+    .stagger.visible > *:nth-child(3) { animation-delay: 0.25s; }
+    .stagger.visible > *:nth-child(4) { animation-delay: 0.35s; }
+    .stagger.visible > *:nth-child(5) { animation-delay: 0.45s; }
+    .stagger.visible > *:nth-child(6) { animation-delay: 0.55s; }
+    .stagger.visible > *:nth-child(7) { animation-delay: 0.65s; }
+    .stagger.visible > *:nth-child(8) { animation-delay: 0.75s; }
+    .stagger.visible > *:nth-child(9) { animation-delay: 0.85s; }
+
+    /* DECORATIVE CROSS SVG */
+    .deco-cross {
+      display: inline-block;
+      color: var(--gold);
+      opacity: 0.4;
+    }
+
+    /* PAGE LOADER */
+    .loader {
+      position: fixed;
+      inset: 0;
+      background: var(--deep);
+      z-index: 100000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .loader-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      background: linear-gradient(135deg, #C9A84C, #F5E6C0, #C9A84C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    .loader-bar-wrap {
+      width: 200px;
+      height: 1px;
+      background: rgba(201,168,76,0.2);
+      overflow: hidden;
+    }
+    .loader-bar {
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      animation: loadBar 1.8s ease-in-out forwards;
+    }
+    @keyframes loadBar {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .loader-text {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-card.featured { grid-row: span 1; }
+      .ai-container { grid-template-columns: 1fr; gap: 60px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2)::after { display: none; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .section-container { padding: 0 24px; }
+      .features-header { grid-template-columns: 1fr; gap: 24px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
+      .pricing-card.popular { transform: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: span 2; grid-row: span 1; min-height: 300px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .features-section, .pricing-section, .gallery-section, .testimonials-section, .ai-section, .cta-section { padding: 80px 0; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+      .hero-title { font-size: 72px; }
+      .hero-lines::before, .hero-lines::after { display: none; }
+    }
+
+    /* PARTICLE CANVAS */
+    #particles { position: absolute; inset: 0; pointer-events: none; opacity: 0.6; }
+  </style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-logo">DEUS</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-text">Preparing your sanctuary</div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#features" onclick="closeMobile()">Features</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#community" onclick="closeMobile()">Community</a>
+  <a href="auth.html" style="color:var(--gold)" onclick="closeMobile()">Begin Journey →</a>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">DEUS</a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#ai">AI Companion</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="#" class="btn-nav" style="display:none" id="navSignIn"><span>Sign In</span></a>
+    <a href="#" class="btn-primary" id="navJoin"><span>Begin Journey</span></a>
+    <button class="mobile-menu-btn" id="menuBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+  <canvas id="particles"></canvas>
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+
+  <!-- Floating verse fragments -->
+  <div class="verse-float" style="top:20%;left:5%;transform:rotate(-12deg);">"I am the Way"</div>
+  <div class="verse-float" style="top:70%;right:6%;transform:rotate(8deg);">"The Truth and the Life"</div>
+  <div class="verse-float" style="top:40%;right:3%;transform:rotate(-5deg);font-size:11px;">John 3:16</div>
+  <div class="verse-float" style="bottom:25%;left:4%;transform:rotate(6deg);font-size:11px;">Psalm 23</div>
+
+  <!-- Large decorative cross -->
+  <svg class="cross-ornament" style="right:-100px;top:-100px;width:500px;height:500px;" viewBox="0 0 100 100" fill="none">
+    <line x1="50" y1="0" x2="50" y2="100" stroke="#C9A84C" stroke-width="0.5"/>
+    <line x1="0" y1="35" x2="100" y2="35" stroke="#C9A84C" stroke-width="0.5"/>
+    <circle cx="50" cy="50" r="48" stroke="#C9A84C" stroke-width="0.3" stroke-dasharray="4 8"/>
+  </svg>
+  <svg class="cross-ornament" style="left:-80px;bottom:-80px;width:400px;height:400px;" viewBox="0 0 100 100" fill="none">
+    <line x1="50" y1="0" x2="50" y2="100" stroke="#C9A84C" stroke-width="0.5"/>
+    <line x1="0" y1="35" x2="100" y2="35" stroke="#C9A84C" stroke-width="0.5"/>
+    <circle cx="50" cy="50" r="48" stroke="#C9A84C" stroke-width="0.3" stroke-dasharray="4 8"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="heroEyebrow">Where Faith Meets the Digital Age</div>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="text-gold-gradient">DEUS</span>
+    </h1>
+    <p class="hero-subtitle-latin" id="heroSubtitle">
+      <em>Lux et Veritas — Light and Truth</em>
+    </p>
+    <p class="hero-desc" id="heroDesc">
+      The world's most beautiful Christian platform. AI spiritual companion, sacred news, holy products, prayer communities &amp; the divine journey — all in one place.
+    </p>
+    <div class="hero-cta" id="heroCta">
+      <a href="#" class="btn-primary"><span>Begin Free Trial — 5 Days</span></a>
+      <a href="#features" class="btn-secondary">Explore the Platform</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" id="scrollIndicator">
+    <div class="scroll-line"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item"><span class="marquee-dot"></span>AI Spiritual Companion</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Sacred News Daily</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Holy Products Store</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Prayer Community</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Bible Study Tools</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Sacred Places Guide</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Daily Devotionals</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Worship Music</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>AI Spiritual Companion</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Sacred News Daily</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Holy Products Store</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Prayer Community</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Bible Study Tools</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Sacred Places Guide</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Daily Devotionals</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Worship Music</div>
+  </div>
+</div>
+
+<!-- STATS SECTION -->
+<section class="stats-section" id="stats">
+  <div class="section-container">
+    <div class="stats-grid stagger">
+      <div class="stat-item">
+        <div class="stat-number text-gold-gradient">2.4B+</div>
+        <div class="stat-label">Christians Worldwide</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number text-gold-gradient">50K+</div>
+        <div class="stat-label">Sacred Texts & Verses</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number text-gold-gradient">1000+</div>
+        <div class="stat-label">Holy Products Curated</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number text-gold-gradient">200+</div>
+        <div class="stat-label">Sacred Places Mapped</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features-section" id="features">
+  <div class="section-container">
+    <div class="features-header">
+      <div class="reveal">
+        <div class="section-eyebrow">Platform Features</div>
+        <h2 class="section-title text-gold-gradient">Everything You Need for a Sacred Digital Life</h2>
+      </div>
+      <div class="reveal delay-2">
+        <p class="section-body">From morning devotions to evening prayers, from sacred shopping to spiritual guidance — DEUS accompanies you every step of your faith journey.</p>
+        <a href="#pricing" class="btn-primary" style="display:inline-block;margin-top:32px;"><span>View All Features</span></a>
+      </div>
+    </div>
+    <div class="features-grid stagger">
+      <div class="feature-card featured">
+        <div class="feature-badge">Exclusive</div>
+        <div class="feature-icon">✝</div>
+        <div class="feature-name">AI Spiritual Companion</div>
+        <p class="feature-desc">Ask anything about the Bible, get scripture-based counsel, explore theology, and receive personalized daily devotions from your divine AI guide — available 24/7.</p>
+        <br/>
+        <p class="feature-desc" style="font-size:14px;color:var(--text-dim);">Powered by sacred scripture training. Answers grounded in the Word.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📰</div>
+        <div class="feature-name">Sacred News</div>
+        <p class="feature-desc">Daily Christian news from around the world — church updates, faith stories, mission reports, and spiritual commentary.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛍</div>
+        <div class="feature-name">Holy Products Store</div>
+        <p class="feature-desc">Curated Christian products — ornaments, crosses, garments, liturgical items, books, and sacred décor.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🙏</div>
+        <div class="feature-name">Prayer Wall</div>
+        <p class="feature-desc">Post prayer requests, light digital candles, and intercede for believers around the globe in real-time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗺</div>
+        <div class="feature-name">Sacred Places</div>
+        <p class="feature-desc">Explore the world's most holy Christian sites — churches, shrines, pilgrimage routes, and hidden sanctuaries.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <div class="feature-name">Daily Devotionals</div>
+        <p class="feature-desc">Streak-based devotional journeys. Build your spiritual practice day by day with guided readings.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎵</div>
+        <div class="feature-name">Sacred Music</div>
+        <p class="feature-desc">Curated worship playlists, Gregorian chants, hymns, and contemporary Christian music for every moment.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <div class="feature-name">Verse Gallery</div>
+        <p class="feature-desc">Beautiful animated Bible verse cards ready to share on social media. Spread the Word beautifully.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE SECTION -->
+<section class="quote-section">
+  <div class="quote-bg"></div>
+  <div class="section-container">
+    <div class="reveal">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        I am the way, the truth, and the life. No one comes to the Father except through me.
+      </p>
+      <p class="quote-source">— John 14:6</p>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="ai-section" id="ai">
+  <div class="section-container">
+    <div class="ai-container">
+      <div class="reveal-left">
+        <div class="section-eyebrow">AI Companion</div>
+        <h2 class="section-title">Your Personal Divine Guide</h2>
+        <p class="section-body" style="margin-bottom:32px;">Ask anything. Explore scripture. Find comfort. Receive guidance. Our AI Companion is trained on sacred texts and theological wisdom to be your spiritual support at any hour.</p>
+        <ul style="list-style:none;margin-bottom:40px;">
+          <li style="display:flex;align-items:start;gap:12px;margin-bottom:16px;">
+            <span style="color:var(--gold);flex-shrink:0;font-size:14px;margin-top:2px;">✦</span>
+            <span style="font-family:'EB Garamond',serif;font-size:17px;color:var(--text-mid);">Scripture-based answers from the Holy Bible</span>
+          </li>
+          <li style="display:flex;align-items:start;gap:12px;margin-bottom:16px;">
+            <span style="color:var(--gold);flex-shrink:0;font-size:14px;margin-top:2px;">✦</span>
+            <span style="font-family:'EB Garamond',serif;font-size:17px;color:var(--text-mid);">Personalized daily devotional generation</span>
+          </li>
+          <li style="display:flex;align-items:start;gap:12px;margin-bottom:16px;">
+            <span style="color:var(--gold);flex-shrink:0;font-size:14px;margin-top:2px;">✦</span>
+            <span style="font-family:'EB Garamond',serif;font-size:17px;color:var(--text-mid);">Confession preparation & spiritual examination</span>
+          </li>
+          <li style="display:flex;align-items:start;gap:12px;">
+            <span style="color:var(--gold);flex-shrink:0;font-size:14px;margin-top:2px;">✦</span>
+            <span style="font-family:'EB Garamond',serif;font-size:17px;color:var(--text-mid);">Prayer drafting in multiple Christian traditions</span>
+          </li>
+        </ul>
+        <a href="#" class="btn-primary"><span>Try AI Companion Free</span></a>
+      </div>
+      <div class="reveal-right">
+        <div class="ai-chat-demo">
+          <div class="ai-chat-header">
+            <div class="ai-avatar">✝</div>
+            <div>
+              <div class="ai-name">Seraphim — AI Companion</div>
+              <div class="ai-status">Online & ready to guide</div>
+            </div>
+          </div>
+          <div class="chat-bubble user">
+            <div class="chat-bubble-inner">I'm feeling lost and don't know where to turn. Can you help me?</div>
+          </div>
+          <div class="chat-bubble ai">
+            <div class="chat-bubble-inner">
+              I hear you, and I'm here. The Lord holds you even when you feel lost. <span class="chat-verse">"The Lord is my shepherd; I shall not want. He makes me lie down in green pastures."</span><br/><br/>Would you like me to guide you through a short prayer, or share what's weighing on your heart?
+            </div>
+          </div>
+          <div class="chat-bubble user">
+            <div class="chat-bubble-inner">Please give me a verse about strength and hope.</div>
+          </div>
+          <div class="chat-bubble ai" id="typingBubble">
+            <div class="chat-bubble-inner">
+              <span class="chat-verse">"I can do all things through Christ who strengthens me."</span> — Philippians 4:13<br/><br/>This verse reminds us that our strength flows from Christ's indwelling presence, not our own power. In your weakness, He is made strong. 🙏
+            </div>
+          </div>
+          <div class="chat-input">
+            <input type="text" placeholder="Ask about faith, scripture, prayer..." id="chatInputDemo" />
+            <button class="chat-send" onclick="demoType()">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section class="gallery-section" id="gallery">
+  <div class="section-container">
+    <div style="display:flex;justify-content:space-between;align-items:end;">
+      <div class="reveal">
+        <div class="section-eyebrow">Sacred Gallery</div>
+        <h2 class="section-title">A Visual Journey Through Faith</h2>
+      </div>
+      <div class="reveal delay-3">
+        <a href="#" class="btn-secondary">View Full Gallery →</a>
+      </div>
+    </div>
+  </div>
+  <div style="padding:0 48px;max-width:1280px;margin:0 auto;">
+    <div class="gallery-grid stagger">
+      <div class="gallery-item gallery-placeholder-1">
+        <div class="gallery-icon-overlay">⛪</div>
+        <div class="gallery-overlay"><span class="gallery-label">Sacred Architecture</span></div>
+      </div>
+      <div class="gallery-item gallery-placeholder-2">
+        <div class="gallery-icon-overlay">✝</div>
+        <div class="gallery-overlay"><span class="gallery-label">Holy Crosses</span></div>
+      </div>
+      <div class="gallery-item gallery-placeholder-3">
+        <div class="gallery-icon-overlay">🕯</div>
+        <div class="gallery-overlay"><span class="gallery-label">Candlelight Vigils</span></div>
+      </div>
+      <div class="gallery-item gallery-placeholder-4">
+        <div class="gallery-icon-overlay">🌅</div>
+        <div class="gallery-overlay"><span class="gallery-label">Morning Devotions</span></div>
+      </div>
+      <div class="gallery-item gallery-placeholder-5">
+        <div class="gallery-icon-overlay">📿</div>
+        <div class="gallery-overlay"><span class="gallery-label">Sacred Ornaments</span></div>
+      </div>
+      <div class="gallery-item gallery-placeholder-6">
+        <div class="gallery-icon-overlay">🙏</div>
+        <div class="gallery-overlay"><span class="gallery-label">Community Prayer</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section class="pricing-section" id="pricing">
+  <div class="section-container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+      <div class="section-eyebrow" style="justify-content:center;">Simple Pricing</div>
+      <h2 class="section-title">Begin Your Sacred Journey</h2>
+      <p class="section-body" style="max-width:none;margin:0 auto;">Start free for 5 days. No credit card required. Experience the full platform before committing to your faith-first membership.</p>
+    </div>
+    <div class="pricing-grid stagger">
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Seeker</div>
+        <div class="pricing-amount text-mid">Free</div>
+        <div class="pricing-period">Limited access, always free</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Daily verse & quote</li>
+          <li>News articles (3/day)</li>
+          <li>Browse products</li>
+          <li>Community prayer wall</li>
+          <li class="dim">AI Spiritual Companion</li>
+          <li class="dim">Unlimited news access</li>
+          <li class="dim">Sacred music player</li>
+          <li class="dim">Sacred places guide</li>
+        </ul>
+        <a href="#" class="btn-secondary" style="width:100%;text-align:center;display:block;">Start Free</a>
+      </div>
+      <!-- Trial / Popular -->
+      <div class="pricing-card popular">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-tier">Disciple</div>
+        <div class="pricing-amount text-gold-gradient">€0.49</div>
+        <div class="pricing-period">per day — unlimited access</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Everything in Seeker</li>
+          <li>AI Spiritual Companion</li>
+          <li>Unlimited news & blogs</li>
+          <li>Sacred music library</li>
+          <li>Sacred places explorer</li>
+          <li>Daily devotional streaks</li>
+          <li>Verse card generator</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn-primary" style="width:100%;text-align:center;display:block;"><span>5 Days Free Trial</span></a>
+      </div>
+      <!-- Annual -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Apostle</div>
+        <div class="pricing-amount text-gold-gradient">€9.99</div>
+        <div class="pricing-period">per month — best value</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Everything in Disciple</li>
+          <li>Save 32% vs daily</li>
+          <li>Exclusive holy products</li>
+          <li>Pilgrimage planner</li>
+          <li>Offline reading mode</li>
+          <li>Family sharing (3 members)</li>
+          <li>Monthly spiritual report</li>
+          <li>Early access to features</li>
+        </ul>
+        <a href="#" class="btn-nav" style="width:100%;text-align:center;display:block;padding:18px;"><span>Choose Apostle</span></a>
+      </div>
+    </div>
+    <p style="text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.2em;color:var(--text-dim);margin-top:32px;">
+      ✦ &nbsp; 5-DAY FREE TRIAL FOR ALL NEW USERS &nbsp; ✦ &nbsp; CANCEL ANYTIME &nbsp; ✦ &nbsp; SECURE PAYMENTS
+    </p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="community">
+  <div class="section-container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 0;" class="reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Community</div>
+      <h2 class="section-title">Voices from the Faithful</h2>
+      <p class="section-body" style="max-width:none;margin:0 auto;">Join thousands of believers who have found a deeper connection to their faith through DEUS.</p>
+    </div>
+    <div class="testimonials-grid stagger">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"DEUS has completely transformed my morning devotional practice. The AI companion gives me scripture-grounded answers I never expected from technology. It truly feels like divine guidance."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👩</div>
+          <div>
+            <div class="testimonial-name">Maria Santos</div>
+            <div class="testimonial-role">Catholic Faithful · Brazil</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"As a pastor, I recommend DEUS to my entire congregation. The news, devotionals, and prayer wall keep our community connected even across distances. An absolute blessing."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">👨</div>
+          <div>
+            <div class="testimonial-name">Rev. James Okafor</div>
+            <div class="testimonial-role">Baptist Pastor · Nigeria</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The sacred places explorer helped me plan my pilgrimage to the Holy Land. The detail and reverence in every section shows this was built by people who truly love Christ."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🧕</div>
+          <div>
+            <div class="testimonial-name">Elena Petrov</div>
+            <div class="testimonial-role">Orthodox Christian · Russia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-ornament"></div>
+  <div class="section-container" style="position:relative;z-index:1;">
+    <div class="reveal">
+      <h2 class="cta-title text-gold-gradient">Begin Your<br/>Sacred Journey</h2>
+      <p class="cta-desc">5 days free. No credit card. Unlimited access to the world's most beautiful Christian platform.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="#" class="btn-primary"><span>Start Free — 5 Days</span></a>
+        <a href="#features" class="btn-secondary">Explore First</a>
+      </div>
+      <p class="cta-trial">✦ &nbsp; Then €0.49/day · Cancel anytime · Join 1000+ believers</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="section-container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand text-gold-gradient">DEUS</div>
+        <p class="footer-tagline">Where Faith Meets the Digital Age. Your sanctuary for sacred news, divine guidance, holy products, and spiritual community.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">📸</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <ul class="footer-links">
+          <li><a href="#">AI Companion</a></li>
+          <li><a href="#">Sacred News</a></li>
+          <li><a href="#">Holy Products</a></li>
+          <li><a href="#">Prayer Wall</a></li>
+          <li><a href="#">Devotionals</a></li>
+          <li><a href="#">Sacred Music</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Sacred Places</a></li>
+          <li><a href="#">Bible Study</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About DEUS</a></li>
+          <li><a href="#">Mission</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Partner With Us</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 DEUS Platform. All rights reserved. Built with faith.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">GDPR</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // LOADER
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      loader.style.transition = 'opacity 1s ease';
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.display = 'none'; initAnimations(); }, 1000);
+    }, 2000);
+  });
+
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+    ring.style.left = mouseX + 'px';
+    ring.style.top = mouseY + 'px';
+  });
+  document.querySelectorAll('a, button, [class*="card"], [class*="btn"]').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+  });
+
+  // NAVBAR SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  // MOBILE MENU
+  document.getElementById('menuBtn').onclick = () => document.getElementById('mobileNav').classList.add('open');
+  document.getElementById('mobileClose').onclick = () => document.getElementById('mobileNav').classList.remove('open');
+  function closeMobile() { document.getElementById('mobileNav').classList.remove('open'); }
+
+  // PARTICLES
+  function initParticles() {
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.3,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.5 + 0.1
+      });
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(201, 168, 76, ${p.opacity})`;
+        ctx.fill();
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+  initParticles();
+
+  // GSAP HERO ANIMATIONS
+  function initAnimations() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero sequence
+    gsap.timeline({ delay: 0.3 })
+      .to('#heroEyebrow', { opacity: 1, duration: 0.8, ease: 'power3.out' })
+      .to('#heroTitle', { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, '-=0.4')
+      .to('#heroSubtitle', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+      .to('#heroDesc', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+      .to('#heroCta', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+      .to('#scrollIndicator', { opacity: 1, duration: 0.6 }, '-=0.2');
+
+    // Scroll reveals
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+
+    const staggerEls = document.querySelectorAll('.stagger');
+    const staggerObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    staggerEls.forEach(el => staggerObs.observe(el));
+
+    // Counter animation for stats
+    const countEls = document.querySelectorAll('.stat-number');
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          gsap.from(entry.target, {
+            textContent: 0,
+            duration: 2,
+            ease: 'power2.out',
+            snap: { textContent: 1 },
+            onStart: function() { this.targets()[0].style.opacity = 1; }
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    countEls.forEach(el => countObs.observe(el));
+
+    // Parallax on hero
+    gsap.to('.verse-float', {
+      yPercent: -30,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+  }
+
+  // AI DEMO TYPING
+  function demoType() {
+    const input = document.getElementById('chatInputDemo');
+    if (!input.value.trim()) return;
+    input.value = '';
+  }
+
+  // MARQUEE DUPLICATE for seamless
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('marqueeTrack');
+    const clone = track.innerHTML;
+    track.innerHTML += clone;
+  });
+
+  // NAV highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>

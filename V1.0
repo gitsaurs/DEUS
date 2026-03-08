@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="DEUS – Your divine companion for faith, prayer, Christian news, spiritual growth, and sacred products. Join 1000+ believers today." />
+  <meta name="keywords" content="Christianity, Christian app, Bible, prayer, faith, Jesus, Church, Catholic, Protestant, spiritual growth, Christian products" />
+  <meta name="author" content="DEUS App" />
+  <meta property="og:title" content="DEUS – Your Divine Companion" />
+  <meta property="og:description" content="Faith, prayer, news, AI chat, and sacred products — all in one place." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://deusapp.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://deusapp.com" />
+  <title>DEUS – Your Divine Companion</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            gold: { 50:'#fffbeb', 100:'#fef3c7', 200:'#fde68a', 300:'#fcd34d', 400:'#fbbf24', 500:'#D4AF37', 600:'#B8960C', 700:'#92740A', 800:'#6B5507', 900:'#453703' },
+            divine: '#D4AF37',
+            cream: '#FEFCF3',
+          },
+          fontFamily: {
+            display: ['Cinzel Decorative', 'serif'],
+            heading: ['Cinzel', 'serif'],
+            body: ['Crimson Pro', 'serif'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'shimmer': 'shimmer 3s linear infinite',
+            'cross-rotate': 'crossRotate 20s linear infinite',
+          },
+          keyframes: {
+            float: { '0%,100%': {transform:'translateY(0px)'}, '50%': {transform:'translateY(-20px)'} },
+            glow: { '0%': {boxShadow:'0 0 20px #D4AF3740'}, '100%': {boxShadow:'0 0 60px #D4AF3790, 0 0 100px #D4AF3740'} },
+            shimmer: { '0%': {backgroundPosition:'-200% center'}, '100%': {backgroundPosition:'200% center'} },
+            crossRotate: { '0%': {transform:'rotate(0deg)'}, '100%': {transform:'rotate(360deg)'} },
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F0D060;
+      --gold-dark: #B8960C;
+      --bg: #FEFCF3;
+      --bg-card: #FFFFFF;
+      --text: #1a1208;
+      --text-muted: #5a4a2a;
+      --border: #e8d99a;
+      --nav-bg: rgba(254,252,243,0.95);
+    }
+    [data-theme="dark"] {
+      --bg: #0a0804;
+      --bg-card: #14100a;
+      --text: #F0D060;
+      --text-muted: #c9a84c;
+      --border: #3a2e0a;
+      --nav-bg: rgba(10,8,4,0.95);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Crimson Pro', serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* Gold shimmer text */
+    .gold-shimmer {
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold), var(--gold-dark));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* Glass card */
+    .glass {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    [data-theme="dark"] .glass {
+      background: rgba(20,16,10,0.6);
+      border: 1px solid rgba(212,175,55,0.25);
+    }
+
+    /* Divine button */
+    .btn-divine {
+      background: linear-gradient(135deg, #D4AF37, #F0D060, #B8960C);
+      color: #1a1208;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-divine::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-divine:hover::before { left: 100%; }
+    .btn-divine:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(212,175,55,0.5); }
+
+    /* Nav */
+    nav {
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(212,175,55,0.2);
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+    }
+
+    /* Hero */
+    .hero-bg {
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.15) 0%, transparent 70%),
+                  radial-gradient(ellipse at 100% 100%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                  var(--bg);
+    }
+    [data-theme="dark"] .hero-bg {
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.2) 0%, transparent 70%),
+                  radial-gradient(ellipse at 100% 100%, rgba(212,175,55,0.1) 0%, transparent 50%),
+                  var(--bg);
+    }
+
+    /* Particle canvas */
+    #particleCanvas { position:absolute; top:0; left:0; pointer-events:none; }
+
+    /* Cross decorative */
+    .cross-deco {
+      position: absolute;
+      opacity: 0.04;
+      font-size: 300px;
+      color: var(--gold);
+      user-select: none;
+      animation: crossRotate 40s linear infinite;
+    }
+
+    /* Feature card hover */
+    .feature-card {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--gold);
+      box-shadow: 0 20px 60px rgba(212,175,55,0.2);
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      width: 52px; height: 28px;
+      background: linear-gradient(135deg, #D4AF37, #F0D060);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: white;
+      transition: all 0.3s ease;
+    }
+    [data-theme="dark"] .theme-toggle::after { left: 27px; background: #0a0804; }
+
+    /* Pricing card */
+    .pricing-popular {
+      border: 2px solid var(--gold);
+      transform: scale(1.05);
+      box-shadow: 0 20px 80px rgba(212,175,55,0.25);
+    }
+
+    /* Bottom nav (mobile) */
+    .bottom-nav {
+      position: fixed; bottom:0; left:0; right:0; z-index:999;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(212,175,55,0.2);
+      padding: 8px 0 env(safe-area-inset-bottom);
+    }
+
+    /* Quote block */
+    .quote-card::before {
+      content: '"';
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 80px;
+      color: var(--gold);
+      opacity: 0.3;
+      position: absolute;
+      top: -10px; left: 10px;
+      line-height: 1;
+    }
+
+    /* News card */
+    .news-img-wrap { overflow: hidden; border-radius: 12px; }
+    .news-img-wrap img { transition: transform 0.5s ease; }
+    .news-card:hover .news-img-wrap img { transform: scale(1.08); }
+
+    /* Loader */
+    #loader {
+      position: fixed; inset:0; z-index:9999;
+      background: var(--bg);
+      display: flex; align-items:center; justify-content:center;
+      flex-direction: column; gap: 16px;
+    }
+    .loader-cross {
+      font-size: 60px; color: var(--gold);
+      animation: float 1.5s ease-in-out infinite;
+    }
+    .loader-bar {
+      width: 200px; height: 2px;
+      background: rgba(212,175,55,0.2);
+      border-radius: 1px; overflow: hidden;
+    }
+    .loader-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #D4AF37, #F0D060);
+      border-radius: 1px;
+      animation: loadFill 2s ease forwards;
+    }
+    @keyframes loadFill { from{width:0} to{width:100%} }
+
+    /* Section divider */
+    .divider {
+      display: flex; align-items: center; gap: 16px;
+      color: var(--gold); opacity: 0.5;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex:1; height:1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      animation: particleFade 4s ease-in-out infinite;
+    }
+    @keyframes particleFade {
+      0%,100%{opacity:0;transform:translateY(0) scale(0)}
+      50%{opacity:0.6;transform:translateY(-60px) scale(1)}
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #D4AF37, #F0D060);
+      color: #1a1208; padding: 10px 24px; border-radius: 24px;
+      font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
+      z-index: 9998; opacity: 0; transition: opacity 0.3s;
+    }
+
+    /* Stats counter */
+    .stat-num { font-family: 'Cinzel Decorative', serif; }
+
+    /* Responsive helpers */
+    @media (max-width: 640px) {
+      .hero-title { font-size: clamp(2rem, 8vw, 3.5rem); }
+      .hide-mobile { display: none !important; }
+    }
+    @media (min-width: 641px) {
+      .show-mobile-only { display: none !important; }
+      .bottom-nav { display: none !important; }
+    }
+
+    .section-enter { opacity: 0; transform: translateY(40px); }
+
+    /* AI Chat bubble */
+    .chat-bubble-ai {
+      background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 18px 18px 18px 4px;
+    }
+    .chat-bubble-user {
+      background: linear-gradient(135deg, #D4AF37, #B8960C);
+      color: #1a1208;
+      border-radius: 18px 18px 4px 18px;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      width: 30px; height: 50px;
+      border: 2px solid rgba(212,175,55,0.5);
+      border-radius: 15px;
+      position: relative;
+    }
+    .scroll-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      left: 50%; top: 8px;
+      transform: translateX(-50%);
+      animation: scrollDot 2s ease-in-out infinite;
+    }
+    @keyframes scrollDot { 0%,100%{top:8px;opacity:1} 50%{top:30px;opacity:0.3} }
+
+    /* Product card */
+    .product-card { transition: all 0.3s ease; }
+    .product-card:hover { transform: translateY(-6px); }
+    .product-badge {
+      background: linear-gradient(135deg, #D4AF37, #F0D060);
+      color: #1a1208; font-family: 'Cinzel', serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    }
+
+    /* Church map pin */
+    .map-pin { animation: float 3s ease-in-out infinite; }
+
+    /* Stars */
+    .star-field {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    }
+    .star {
+      position: absolute; width: 2px; height: 2px;
+      background: var(--gold); border-radius: 50%;
+      animation: twinkle var(--d, 3s) ease-in-out infinite;
+      opacity: var(--o, 0.4);
+    }
+    @keyframes twinkle { 0%,100%{opacity:var(--o)} 50%{opacity:0.1} }
+  </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-cross">✝</div>
+  <p class="gold-shimmer" style="font-family:'Cinzel Decorative',serif; font-size:28px; letter-spacing:0.3em;">DEUS</p>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <p style="font-family:'Crimson Pro',serif; font-size:14px; opacity:0.5; margin-top:8px;">Your Divine Companion</p>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════ NAVIGATION ═══════════════════════ -->
+<nav id="mainNav">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center gap-2 group">
+      <span style="font-size:22px; color:var(--gold);">✝</span>
+      <span style="font-family:'Cinzel Decorative',serif; font-size:20px; font-weight:700;" class="gold-shimmer">DEUS</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hide-mobile flex items-center gap-6">
+      <a href="#features" class="nav-link" style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.05em;">Features</a>
+      <a href="news.html" class="nav-link" style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.05em;">News</a>
+      <a href="products.html" class="nav-link" style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.05em;">Shop</a>
+      <a href="places.html" class="nav-link" style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.05em;">Places</a>
+      <a href="#pricing" class="nav-link" style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.05em;">Pricing</a>
+    </div>
+
+    <!-- Right controls -->
+    <div class="flex items-center gap-3">
+      <!-- Theme Toggle -->
+      <div class="theme-toggle" id="themeToggle" title="Toggle theme">
+        <span style="position:absolute;top:50%;left:6px;transform:translateY(-50%);font-size:11px;z-index:1;">☀️</span>
+        <span style="position:absolute;top:50%;right:6px;transform:translateY(-50%);font-size:11px;z-index:1;">🌙</span>
+      </div>
+      <a href="login.html" class="hide-mobile px-4 py-2 rounded-full btn-divine text-sm">Sign In</a>
+      <a href="#" id="menuBtn" class="show-mobile-only" style="color:var(--gold);font-size:22px;"><i class="fas fa-bars"></i></a>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" style="display:none; position:fixed; inset:0; z-index:998; background:var(--bg); padding-top:80px;">
+  <div class="flex flex-col items-center gap-8 pt-8">
+    <a href="#features" class="mobile-menu-link" style="font-family:'Cinzel',serif; font-size:22px; color:var(--gold);" onclick="closeMobile()">Features</a>
+    <a href="news.html" class="mobile-menu-link" style="font-family:'Cinzel',serif; font-size:22px; color:var(--text);" onclick="closeMobile()">News</a>
+    <a href="products.html" class="mobile-menu-link" style="font-family:'Cinzel',serif; font-size:22px; color:var(--text);" onclick="closeMobile()">Shop</a>
+    <a href="places.html" class="mobile-menu-link" style="font-family:'Cinzel',serif; font-size:22px; color:var(--text);" onclick="closeMobile()">Sacred Places</a>
+    <a href="#pricing" class="mobile-menu-link" style="font-family:'Cinzel',serif; font-size:22px; color:var(--text);" onclick="closeMobile()">Pricing</a>
+    <div class="divider w-48"><i class="fas fa-cross" style="font-size:12px;"></i></div>
+    <a href="login.html" class="btn-divine px-8 py-3 rounded-full text-base">Begin Your Journey</a>
+    <a href="#" onclick="closeMobile()" style="color:var(--text-muted); font-size:13px; margin-top:20px;"><i class="fas fa-times"></i> Close</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════ HERO SECTION ═══════════════════════ -->
+<section class="hero-bg min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20 pb-32" id="hero">
+
+  <!-- Star field -->
+  <div class="star-field" id="starField"></div>
+
+  <!-- Decorative cross bg -->
+  <div class="cross-deco" style="top:-80px; right:-80px; font-size:400px; font-family:serif;">✝</div>
+  <div class="cross-deco" style="bottom:-100px; left:-100px; font-size:350px; animation-direction:reverse; opacity:0.03;">✝</div>
+
+  <!-- Floating particles -->
+  <div id="heroParticles"></div>
+
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+
+    <!-- Badge -->
+    <div id="heroBadge" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 opacity-0"
+         style="border:1px solid rgba(212,175,55,0.4);">
+      <span style="width:8px;height:8px;border-radius:50%;background:#4ade80;display:inline-block;animation:pulse 2s infinite;"></span>
+      <span style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.1em; color:var(--gold);">NOW LIVE · FREE 5-DAY TRIAL</span>
+    </div>
+
+    <!-- Main title -->
+    <h1 class="hero-title mb-4 opacity-0" id="heroTitle"
+        style="font-family:'Cinzel Decorative',serif; font-size:clamp(3rem,10vw,5.5rem); font-weight:900; line-height:1.1; letter-spacing:0.05em;">
+      <span class="gold-shimmer">DEUS</span>
+    </h1>
+
+    <p class="opacity-0" id="heroSub"
+       style="font-family:'Cinzel',serif; font-size:clamp(1rem,3vw,1.4rem); letter-spacing:0.15em; color:var(--text-muted); margin-bottom:24px;">
+      YOUR DIVINE COMPANION
+    </p>
+
+    <p class="opacity-0 max-w-2xl mx-auto mb-10" id="heroDesc"
+       style="font-family:'Crimson Pro',serif; font-size:clamp(1.1rem,2.5vw,1.3rem); line-height:1.8; color:var(--text-muted);">
+      Deepen your faith with AI-powered spiritual guidance, sacred news, holy places, prayer communities, and exclusive Christian products — all in one divine space.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0" id="heroCTAs">
+      <a href="register.html" class="btn-divine px-8 py-4 rounded-full text-base w-full sm:w-auto text-center"
+         style="font-family:'Cinzel',serif; letter-spacing:0.08em;">
+        ✝ &nbsp; Begin Free Trial
+      </a>
+      <a href="#features" class="px-8 py-4 rounded-full w-full sm:w-auto text-center"
+         style="border:1px solid var(--gold); color:var(--gold); font-family:'Cinzel',serif; font-size:14px; letter-spacing:0.08em; transition:all 0.3s;">
+        Explore Features
+      </a>
+    </div>
+
+    <!-- Trust line -->
+    <p class="mt-6 opacity-0" id="heroTrust"
+       style="font-size:13px; color:var(--text-muted); font-family:'Crimson Pro',serif;">
+      5 days free · €0.49/day after · Cancel anytime
+    </p>
+
+    <!-- Scroll indicator -->
+    <div class="flex flex-col items-center mt-16 opacity-0" id="scrollInd">
+      <div class="scroll-indicator"><div class="scroll-dot"></div></div>
+      <p style="font-size:11px; letter-spacing:0.15em; color:var(--text-muted); margin-top:8px; font-family:'Cinzel',serif;">SCROLL</p>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="absolute bottom-0 left-0 right-0" id="statsBar"
+       style="background:linear-gradient(90deg, rgba(212,175,55,0.1), rgba(212,175,55,0.05), rgba(212,175,55,0.1)); border-top:1px solid rgba(212,175,55,0.2); padding:16px 24px;">
+    <div class="max-w-4xl mx-auto flex justify-around items-center flex-wrap gap-4">
+      <div class="text-center">
+        <div class="stat-num gold-shimmer" style="font-size:28px;">1K+</div>
+        <div style="font-size:11px; letter-spacing:0.1em; color:var(--text-muted); font-family:'Cinzel',serif;">BELIEVERS</div>
+      </div>
+      <div style="width:1px; height:40px; background:rgba(212,175,55,0.3);" class="hide-mobile"></div>
+      <div class="text-center">
+        <div class="stat-num gold-shimmer" style="font-size:28px;">50+</div>
+        <div style="font-size:11px; letter-spacing:0.1em; color:var(--text-muted); font-family:'Cinzel',serif;">SACRED PLACES</div>
+      </div>
+      <div style="width:1px; height:40px; background:rgba(212,175,55,0.3);" class="hide-mobile"></div>
+      <div class="text-center">
+        <div class="stat-num gold-shimmer" style="font-size:28px;">24/7</div>
+        <div style="font-size:11px; letter-spacing:0.1em; color:var(--text-muted); font-family:'Cinzel',serif;">AI GUIDANCE</div>
+      </div>
+      <div style="width:1px; height:40px; background:rgba(212,175,55,0.3);" class="hide-mobile"></div>
+      <div class="text-center">
+        <div class="stat-num gold-shimmer" style="font-size:28px;">5★</div>
+        <div style="font-size:11px; letter-spacing:0.1em; color:var(--text-muted); font-family:'Cinzel',serif;">USER RATING</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FEATURES SECTION ═══════════════════════ -->
+<section id="features" class="py-24 px-6 relative">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16 section-enter">
+      <div class="divider mb-6"><i class="fas fa-cross" style="font-size:12px; color:var(--gold);"></i></div>
+      <h2 style="font-family:'Cinzel Decorative',serif; font-size:clamp(1.8rem,5vw,2.8rem); margin-bottom:12px;">
+        <span class="gold-shimmer">Divine Features</span>
+      </h2>
+      <p style="color:var(--text-muted); font-size:1.1rem; max-width:600px; margin:0 auto; line-height:1.8;">
+        Everything you need for a deeper, richer faith journey — curated with love and built with purpose.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+      <!-- Feature 1: AI Chat -->
+      <div class="feature-card rounded-2xl p-5 section-enter" onclick="showFeatureModal('ai')">
+        <div class="text-3xl mb-3">🤖</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">AI Spiritual Guide</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Chat with our AI trained on scripture, theology & Christian wisdom. Ask anything.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">PREMIUM</span>
+      </div>
+
+      <!-- Feature 2: Bible -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">📖</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Daily Scripture</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Verse of the day with immersive backgrounds, audio narration & deep study notes.</p>
+        <span style="display:inline-block; background:rgba(74,222,128,0.15); color:#4ade80; padding:2px 8px; border-radius:999px; font-size:9px; font-family:'Cinzel',serif; margin-top:12px; letter-spacing:0.05em;">FREE</span>
+      </div>
+
+      <!-- Feature 3: Prayer -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">🙏</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Prayer Network</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Submit requests, pray for others. A living chain of intercession across the globe.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">PREMIUM</span>
+      </div>
+
+      <!-- Feature 4: News -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">📰</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Christian News</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Curated news from the global Church — Vatican, missions, testimonies & more.</p>
+        <span style="display:inline-block; background:rgba(74,222,128,0.15); color:#4ade80; padding:2px 8px; border-radius:999px; font-size:9px; font-family:'Cinzel',serif; margin-top:12px; letter-spacing:0.05em;">FREE</span>
+      </div>
+
+      <!-- Feature 5: Sacred Places -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">⛪</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Sacred Places</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Explore pilgrimage sites, churches & shrines with 360° tours & GPS guidance.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">PREMIUM</span>
+      </div>
+
+      <!-- Feature 6: Shop -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">🛍️</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Sacred Shop</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Ornaments, rosaries, apparel, ritual items — blessed & delivered to your door.</p>
+        <span style="display:inline-block; background:rgba(74,222,128,0.15); color:#4ade80; padding:2px 8px; border-radius:999px; font-size:9px; font-family:'Cinzel',serif; margin-top:12px; letter-spacing:0.05em;">FREE BROWSE</span>
+      </div>
+
+      <!-- Feature 7: Quotes -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">💬</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Saint Quotes</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Daily wisdom from Saints, Popes & theologians. Share as beautiful cards.</p>
+        <span style="display:inline-block; background:rgba(74,222,128,0.15); color:#4ade80; padding:2px 8px; border-radius:999px; font-size:9px; font-family:'Cinzel',serif; margin-top:12px; letter-spacing:0.05em;">FREE</span>
+      </div>
+
+      <!-- Feature 8: Rosary -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">📿</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Guided Prayer</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Rosary, Chaplet, Novenas — guided audio with beautiful animated visuals.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">PREMIUM</span>
+      </div>
+
+      <!-- Feature 9: Calendar -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">📅</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Church Calendar</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Liturgical seasons, feast days, saint days — live & synced to your denomination.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">PREMIUM</span>
+      </div>
+
+      <!-- Feature 10: Confession -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">🕊️</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Reflection Journal</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Private AI-guided spiritual journal. Reflect, confess, grow. 100% private.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">UNIQUE ✦</span>
+      </div>
+
+      <!-- Feature 11: Growth Tracker -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">🏆</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Spiritual Growth</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Track streaks, earn divine badges, set prayer goals. Your faith journey visualized.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">UNIQUE ✦</span>
+      </div>
+
+      <!-- Feature 12: Mass Finder -->
+      <div class="feature-card rounded-2xl p-5 section-enter">
+        <div class="text-3xl mb-3">📍</div>
+        <h3 style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; margin-bottom:6px; color:var(--gold);">Mass Finder</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">Find nearby churches & Mass times via GPS. Never miss Sunday worship again.</p>
+        <span class="product-badge inline-block px-2 py-1 rounded-full mt-3" style="font-size:9px;">PREMIUM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ AI CHAT PREVIEW ═══════════════════════ -->
+<section class="py-20 px-6 relative overflow-hidden" style="background:linear-gradient(135deg, rgba(212,175,55,0.05) 0%, transparent 50%, rgba(212,175,55,0.05) 100%);">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Left: Content -->
+      <div class="section-enter">
+        <div class="divider mb-6" style="justify-content:flex-start;"><i class="fas fa-cross" style="font-size:12px; color:var(--gold);"></i></div>
+        <h2 style="font-family:'Cinzel Decorative',serif; font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:16px; line-height:1.3;">
+          Your AI <span class="gold-shimmer">Spiritual Guide</span>
+        </h2>
+        <p style="color:var(--text-muted); font-size:1.05rem; line-height:1.9; margin-bottom:24px;">
+          Ask anything about faith, scripture, theology, or life's challenges. Our AI is trained on centuries of Christian wisdom, the Bible, and the writings of the Saints.
+        </p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+          <li style="display:flex; align-items:center; gap:12px; color:var(--text-muted); font-size:14px;">
+            <span style="color:var(--gold);">✦</span> Bible verse explanations & context
+          </li>
+          <li style="display:flex; align-items:center; gap:12px; color:var(--text-muted); font-size:14px;">
+            <span style="color:var(--gold);">✦</span> Spiritual direction & prayer guidance
+          </li>
+          <li style="display:flex; align-items:center; gap:12px; color:var(--text-muted); font-size:14px;">
+            <span style="color:var(--gold);">✦</span> Saint stories & theological Q&A
+          </li>
+          <li style="display:flex; align-items:center; gap:12px; color:var(--text-muted); font-size:14px;">
+            <span style="color:var(--gold);">✦</span> Guided reflection & journaling
+          </li>
+        </ul>
+        <a href="chat.html" class="btn-divine inline-flex items-center gap-2 px-6 py-3 rounded-full mt-8"
+           style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.08em;">
+          <i class="fas fa-comment-dots"></i> Try AI Chat Free
+        </a>
+      </div>
+
+      <!-- Right: Chat UI -->
+      <div class="section-enter">
+        <div class="rounded-3xl overflow-hidden" style="border:1px solid rgba(212,175,55,0.3); background:var(--bg-card); box-shadow:0 30px 80px rgba(212,175,55,0.15);">
+
+          <!-- Chat header -->
+          <div style="padding:16px 20px; background:linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05)); border-bottom:1px solid rgba(212,175,55,0.2); display:flex; align-items:center; gap:12px;">
+            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#D4AF37,#F0D060); display:flex; align-items:center; justify-content:center; font-size:18px;">✝</div>
+            <div>
+              <div style="font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--gold);">DEUS AI Guide</div>
+              <div style="font-size:11px; color:#4ade80; display:flex; align-items:center; gap:4px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span> Online
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat messages -->
+          <div style="padding:20px; display:flex; flex-direction:column; gap:16px; min-height:300px;">
+
+            <div class="chat-bubble-ai" style="padding:14px 18px; max-width:85%; align-self:flex-start;">
+              <p style="font-size:14px; line-height:1.7; color:var(--text);">Peace be with you 🙏 I'm your DEUS spiritual companion. Ask me anything about faith, scripture, or prayer.</p>
+            </div>
+
+            <div class="chat-bubble-user" style="padding:14px 18px; max-width:85%; align-self:flex-end;">
+              <p style="font-size:14px; line-height:1.7;">What does John 3:16 mean for my daily life?</p>
+            </div>
+
+            <div class="chat-bubble-ai" style="padding:14px 18px; max-width:90%; align-self:flex-start;">
+              <p style="font-size:14px; line-height:1.7; color:var(--text);">John 3:16 reminds us that <span style="color:var(--gold); font-weight:600;">God's love is unconditional and eternal</span>. For daily life, it means living without fear — you are deeply loved. Let that love flow outward to everyone you meet today. 🌟</p>
+            </div>
+
+            <!-- Typing indicator -->
+            <div class="chat-bubble-ai" style="padding:14px 18px; align-self:flex-start; display:flex; gap:4px; align-items:center;">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);animation:float 1s ease-in-out infinite;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);animation:float 1s ease-in-out infinite 0.2s;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);animation:float 1s ease-in-out infinite 0.4s;"></span>
+            </div>
+          </div>
+
+          <!-- Chat input -->
+          <div style="padding:16px 20px; border-top:1px solid rgba(212,175,55,0.2); display:flex; gap:10px; align-items:center;">
+            <input type="text" placeholder="Ask about faith, scripture, prayer..." 
+                   style="flex:1; background:transparent; border:1px solid rgba(212,175,55,0.3); border-radius:24px; padding:10px 16px; font-family:'Crimson Pro',serif; font-size:14px; color:var(--text); outline:none;"
+                   onclick="window.location.href='chat.html'" readonly />
+            <button class="btn-divine w-10 h-10 rounded-full flex items-center justify-center" style="flex-shrink:0;">
+              <i class="fas fa-paper-plane" style="font-size:13px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ DAILY VERSE ═══════════════════════ -->
+<section class="py-20 px-6" style="background:linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.03) 100%);">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="divider mb-6"><i class="fas fa-dove" style="font-size:12px; color:var(--gold);"></i></div>
+    <h2 class="section-enter" style="font-family:'Cinzel',serif; font-size:14px; letter-spacing:0.3em; color:var(--text-muted); margin-bottom:32px;">TODAY'S SCRIPTURE</h2>
+
+    <div class="quote-card relative rounded-3xl p-10 section-enter glass">
+      <p id="verseText" style="font-family:'Crimson Pro',serif; font-size:clamp(1.4rem,3vw,2rem); line-height:1.8; color:var(--text); font-style:italic; margin-bottom:16px;">
+        "For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."
+      </p>
+      <p style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.15em; color:var(--gold);">— JEREMIAH 29:11</p>
+
+      <button class="btn-divine px-6 py-3 rounded-full mt-8 mx-auto flex items-center gap-2"
+              style="font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.08em;" onclick="shareVerse()">
+        <i class="fas fa-share-alt"></i> Share This Verse
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PRODUCTS PREVIEW ═══════════════════════ -->
+<section class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 section-enter">
+      <div class="divider mb-6"><i class="fas fa-shopping-bag" style="font-size:12px; color:var(--gold);"></i></div>
+      <h2 style="font-family:'Cinzel Decorative',serif; font-size:clamp(1.8rem,5vw,2.8rem); margin-bottom:12px;">
+        <span class="gold-shimmer">Sacred Collection</span>
+      </h2>
+      <p style="color:var(--text-muted); font-size:1.05rem; max-width:500px; margin:0 auto;">
+        Curated Christian products — from hand-crafted rosaries to blessed ornaments and devotional apparel.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- Product 1 -->
+      <div class="product-card rounded-2xl overflow-hidden" style="background:var(--bg-card); border:1px solid var(--border);">
+        <div style="height:160px; background:linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05)); display:flex; align-items:center; justify-content:center; font-size:60px; position:relative;">
+          📿
+          <span class="product-badge absolute top-2 left-2 px-2 py-1 rounded-full" style="font-size:9px;">BLESSED</span>
+        </div>
+        <div style="padding:14px;">
+          <p style="font-family:'Cinzel',serif; font-size:13px; font-weight:600; margin-bottom:4px;">Gold Rosary</p>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Hand-crafted with love</p>
+          <p style="font-family:'Cinzel',serif; font-size:16px; color:var(--gold);">€24.99</p>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="product-card rounded-2xl overflow-hidden" style="background:var(--bg-card); border:1px solid var(--border);">
+        <div style="height:160px; background:linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.03)); display:flex; align-items:center; justify-content:center; font-size:60px; position:relative;">
+          ✝
+          <span class="product-badge absolute top-2 left-2 px-2 py-1 rounded-full" style="font-size:9px;">NEW</span>
+        </div>
+        <div style="padding:14px;">
+          <p style="font-family:'Cinzel',serif; font-size:13px; font-weight:600; margin-bottom:4px;">Silver Cross</p>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">925 sterling silver</p>
+          <p style="font-family:'Cinzel',serif; font-size:16px; color:var(--gold);">€39.99</p>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="product-card rounded-2xl overflow-hidden" style="background:var(--bg-card); border:1px solid var(--border);">
+        <div style="height:160px; background:linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05)); display:flex; align-items:center; justify-content:center; font-size:60px; position:relative;">
+          👕
+        </div>
+        <div style="padding:14px;">
+          <p style="font-family:'Cinzel',serif; font-size:13px; font-weight:600; margin-bottom:4px;">Faith Tee</p>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Premium cotton blend</p>
+          <p style="font-family:'Cinzel',serif; font-size:16px; color:var(--gold);">€19.99</p>
+        </div>
+      </div>
+      <!-- Product 4 -->
+      <div class="product-card rounded-2xl overflow-hidden" style="background:var(--bg-card); border:1px solid var(--border);">
+        <div style="height:160px; background:linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.03)); display:flex; align-items:center; justify-content:center; font-size:60px; position:relative;">
+          🕯️
+          <span class="product-badge absolute top-2 left-2 px-2 py-1 rounded-full" style="font-size:9px;">TOP SELLER</span>
+        </div>
+        <div style="padding:14px;">
+          <p style="font-family:'Cinzel',serif; font-size:13px; font-weight:600; margin-bottom:4px;">Prayer Candle</p>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Blessed beeswax</p>
+          <p style="font-family:'Cinzel',serif; font-size:16px; color:var(--gold);">€12.99</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="products.html" class="btn-divine px-8 py-3 rounded-full inline-block"
+         style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.08em;">
+        View All Products →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PRICING SECTION ═══════════════════════ -->
+<section id="pricing" class="py-24 px-6 relative overflow-hidden">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="text-center mb-16 section-enter">
+      <div class="divider mb-6"><i class="fas fa-crown" style="font-size:12px; color:var(--gold);"></i></div>
+      <h2 style="font-family:'Cinzel Decorative',serif; font-size:clamp(1.8rem,5vw,2.8rem); margin-bottom:12px;">
+        Simple, <span class="gold-shimmer">Sacred Pricing</span>
+      </h2>
+      <p style="color:var(--text-muted); font-size:1.05rem;">Start free for 5 days. Then just €0.49/day — less than a coffee.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Free Plan -->
+      <div class="rounded-3xl p-8 section-enter" style="background:var(--bg-card); border:1px solid var(--border);">
+        <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.2em; color:var(--text-muted); margin-bottom:8px;">FOUNDATION</div>
+        <div style="font-family:'Cinzel Decorative',serif; font-size:36px; color:var(--text); margin-bottom:4px;">Free</div>
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:28px;">5-day trial for new believers</p>
+
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:32px;">
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-muted);">
+            <i class="fas fa-check" style="color:#4ade80; width:16px;"></i> Daily Bible verse
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-muted);">
+            <i class="fas fa-check" style="color:#4ade80; width:16px;"></i> Christian news (read)
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-muted);">
+            <i class="fas fa-check" style="color:#4ade80; width:16px;"></i> Saint quotes
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-muted);">
+            <i class="fas fa-check" style="color:#4ade80; width:16px;"></i> Browse products
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-muted); opacity:0.5;">
+            <i class="fas fa-times" style="color:#ef4444; width:16px;"></i> AI Spiritual Guide
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-muted); opacity:0.5;">
+            <i class="fas fa-times" style="color:#ef4444; width:16px;"></i> Prayer Network
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-muted); opacity:0.5;">
+            <i class="fas fa-times" style="color:#ef4444; width:16px;"></i> Sacred Places & GPS
+          </li>
+        </ul>
+
+        <a href="register.html" class="block text-center py-3 rounded-full w-full"
+           style="border:1px solid var(--gold); color:var(--gold); font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.08em; transition:all 0.3s;"
+           onmouseover="this.style.background='rgba(212,175,55,0.1)'" onmouseout="this.style.background='transparent'">
+          Start Free Trial
+        </a>
+      </div>
+
+      <!-- Premium Plan -->
+      <div class="rounded-3xl p-8 section-enter pricing-popular relative" style="background:var(--bg-card);">
+        <!-- Popular badge -->
+        <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%);">
+          <span class="product-badge px-4 py-1.5 rounded-full" style="font-size:10px; white-space:nowrap; box-shadow:0 4px 20px rgba(212,175,55,0.4);">
+            ✦ MOST CHOSEN ✦
+          </span>
+        </div>
+
+        <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.2em; color:var(--gold); margin-bottom:8px;">DIVINE UNLIMITED</div>
+        <div style="display:flex; align-items:baseline; gap:4px; margin-bottom:4px;">
+          <span style="font-family:'Cinzel Decorative',serif; font-size:42px; color:var(--gold);">€0.49</span>
+          <span style="color:var(--text-muted); font-size:14px;">/day</span>
+        </div>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:4px;">≈ €14.70/month · Billed monthly</p>
+        <p style="color:var(--text-muted); font-size:12px; margin-bottom:28px; opacity:0.7;">5-day free trial included</p>
+
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:32px;">
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Everything in Free
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Unlimited AI Spiritual Guide
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Prayer Network access
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Sacred Places + GPS
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Guided Rosary & Chaplet
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Spiritual Growth Tracker
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Liturgical Calendar
+          </li>
+          <li style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text);">
+            <i class="fas fa-check" style="color:var(--gold); width:16px;"></i> Exclusive member discounts
+          </li>
+        </ul>
+
+        <a href="register.html?plan=premium" class="btn-divine block text-center py-3 rounded-full w-full"
+           style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.08em; animation:glow 2s ease-in-out infinite;">
+          ✝ &nbsp; Begin Divine Journey
+        </a>
+      </div>
+    </div>
+
+    <p class="text-center mt-8 section-enter" style="font-size:13px; color:var(--text-muted);">
+      🔒 Secure payment · Cancel anytime · No hidden fees
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ TESTIMONIALS ═══════════════════════ -->
+<section class="py-20 px-6" style="background:linear-gradient(135deg, rgba(212,175,55,0.05) 0%, transparent 50%, rgba(212,175,55,0.05) 100%);">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 section-enter">
+      <div class="divider mb-6"><i class="fas fa-heart" style="font-size:12px; color:var(--gold);"></i></div>
+      <h2 style="font-family:'Cinzel Decorative',serif; font-size:clamp(1.6rem,4vw,2.4rem);">
+        <span class="gold-shimmer">Beloved By Believers</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="feature-card rounded-2xl p-6 section-enter">
+        <div style="display:flex; gap:2px; color:var(--gold); margin-bottom:12px; font-size:14px;">★★★★★</div>
+        <p style="font-style:italic; color:var(--text-muted); font-size:14px; line-height:1.8; margin-bottom:16px;">
+          "DEUS has completely transformed my morning prayer routine. The AI guide helps me understand scripture in ways I never imagined."
+        </p>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#D4AF37,#F0D060); display:flex; align-items:center; justify-content:center; font-size:16px;">👤</div>
+          <div>
+            <p style="font-family:'Cinzel',serif; font-size:13px; font-weight:600;">María González</p>
+            <p style="font-size:11px; color:var(--text-muted);">Madrid, Spain</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card rounded-2xl p-6 section-enter">
+        <div style="display:flex; gap:2px; color:var(--gold); margin-bottom:12px; font-size:14px;">★★★★★</div>
+        <p style="font-style:italic; color:var(--text-muted); font-size:14px; line-height:1.8; margin-bottom:16px;">
+          "The prayer network is incredible. Knowing thousands of people are praying with me gives me so much strength and peace."
+        </p>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#D4AF37,#F0D060); display:flex; align-items:center; justify-content:center; font-size:16px;">👤</div>
+          <div>
+            <p style="font-family:'Cinzel',serif; font-size:13px; font-weight:600;">John Murphy</p>
+            <p style="font-size:11px; color:var(--text-muted);">Dublin, Ireland</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card rounded-2xl p-6 section-enter">
+        <div style="display:flex; gap:2px; color:var(--gold); margin-bottom:12px; font-size:14px;">★★★★★</div>
+        <p style="font-style:italic; color:var(--text-muted); font-size:14px; line-height:1.8; margin-bottom:16px;">
+          "Worth every cent. The rosary guide and liturgical calendar alone are priceless. My faith has grown enormously since joining."
+        </p>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#D4AF37,#F0D060); display:flex; align-items:center; justify-content:center; font-size:16px;">👤</div>
+          <div>
+            <p style="font-family:'Cinzel',serif; font-size:13px; font-weight:600;">Anna Kowalski</p>
+            <p style="font-size:11px; color:var(--text-muted);">Kraków, Poland</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CTA SECTION ═══════════════════════ -->
+<section class="py-24 px-6 text-center relative overflow-hidden">
+  <div class="cross-deco" style="top:-50%; left:50%; transform:translateX(-50%); font-size:600px; opacity:0.02; animation:crossRotate 60s linear infinite;">✝</div>
+  <div class="max-w-2xl mx-auto relative z-10 section-enter">
+    <div class="divider mb-8"><i class="fas fa-cross" style="font-size:12px; color:var(--gold);"></i></div>
+    <h2 style="font-family:'Cinzel Decorative',serif; font-size:clamp(2rem,6vw,3.5rem); margin-bottom:16px; line-height:1.2;">
+      Begin Your <span class="gold-shimmer">Divine</span> Journey
+    </h2>
+    <p style="color:var(--text-muted); font-size:1.1rem; line-height:1.8; margin-bottom:32px;">
+      Join thousands of believers deepening their faith with DEUS. Your first 5 days are completely free.
+    </p>
+    <a href="register.html" class="btn-divine px-10 py-4 rounded-full text-lg inline-flex items-center gap-3"
+       style="font-family:'Cinzel',serif; letter-spacing:0.08em; animation:glow 2s ease-in-out infinite;">
+      ✝ &nbsp; Start Free — No Card Required
+    </a>
+    <p style="margin-top:16px; font-size:13px; color:var(--text-muted);">
+      Then €0.49/day for unlimited divine access
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer style="background:var(--bg-card); border-top:1px solid var(--border); padding:40px 24px;">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-8 mb-12">
+
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <span style="font-size:24px; color:var(--gold);">✝</span>
+          <span style="font-family:'Cinzel Decorative',serif; font-size:22px; font-weight:700;" class="gold-shimmer">DEUS</span>
+        </div>
+        <p style="color:var(--text-muted); font-size:14px; line-height:1.8; max-width:300px; margin-bottom:16px;">
+          Your divine companion for faith, prayer, and spiritual growth. Bringing hearts closer to God, one day at a time.
+        </p>
+        <div style="display:flex; gap:12px;">
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3); display:flex; align-items:center; justify-content:center; color:var(--gold); transition:all 0.3s;" 
+             onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(212,175,55,0.1)'">
+            <i class="fab fa-instagram" style="font-size:14px;"></i>
+          </a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3); display:flex; align-items:center; justify-content:center; color:var(--gold); transition:all 0.3s;"
+             onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(212,175,55,0.1)'">
+            <i class="fab fa-facebook" style="font-size:14px;"></i>
+          </a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3); display:flex; align-items:center; justify-content:center; color:var(--gold); transition:all 0.3s;"
+             onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(212,175,55,0.1)'">
+            <i class="fab fa-youtube" style="font-size:14px;"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.15em; color:var(--gold); margin-bottom:16px;">EXPLORE</h4>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="news.html" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Christian News</a>
+          <a href="chat.html" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">AI Spiritual Guide</a>
+          <a href="products.html" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Sacred Shop</a>
+          <a href="places.html" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Holy Places</a>
+          <a href="quotes.html" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Saint Quotes</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.15em; color:var(--gold); margin-bottom:16px;">COMPANY</h4>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="#" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">About DEUS</a>
+          <a href="#pricing" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Pricing</a>
+          <a href="#" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
+          <a href="#" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
+          <a href="#" style="color:var(--text-muted); font-size:14px; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border); padding-top:24px; display:flex; flex-direction:column; sm:flex-direction:row; align-items:center; justify-content:space-between; gap:12px;">
+      <p style="font-size:12px; color:var(--text-muted); text-align:center;">
+        © 2025 DEUS App. All rights reserved. Made with ✝ for believers worldwide.
+      </p>
+      <p style="font-size:12px; color:var(--text-muted); text-align:center;">
+        "I can do all things through Christ who strengthens me." — Phil 4:13
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ MOBILE BOTTOM NAV ═══════════════════════ -->
+<div class="bottom-nav show-mobile-only">
+  <div style="display:flex; justify-content:space-around; align-items:center; padding:4px 0;">
+    <a href="index.html" class="bottom-nav-item active" style="display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--gold);">
+      <i class="fas fa-home" style="font-size:20px;"></i>
+      <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.05em;">HOME</span>
+    </a>
+    <a href="news.html" class="bottom-nav-item" style="display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--text-muted);">
+      <i class="fas fa-newspaper" style="font-size:20px;"></i>
+      <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.05em;">NEWS</span>
+    </a>
+    <a href="chat.html" style="display:flex; flex-direction:column; align-items:center; gap:3px; position:relative;">
+      <div style="width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,#D4AF37,#F0D060); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(212,175,55,0.5); margin-top:-20px; font-size:22px; color:#1a1208; animation:glow 2s ease-in-out infinite;">✝</div>
+      <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.05em; color:var(--gold);">DEUS AI</span>
+    </a>
+    <a href="products.html" class="bottom-nav-item" style="display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--text-muted);">
+      <i class="fas fa-shopping-bag" style="font-size:20px;"></i>
+      <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.05em;">SHOP</span>
+    </a>
+    <a href="profile.html" class="bottom-nav-item" style="display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--text-muted);">
+      <i class="fas fa-user" style="font-size:20px;"></i>
+      <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.05em;">PROFILE</span>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════ JAVASCRIPT ═══════════════════════ -->
+<script>
+// ── Theme ──────────────────────────────────────────────
+const html = document.documentElement;
+const savedTheme = localStorage.getItem('deus-theme') || 'light';
+html.setAttribute('data-theme', savedTheme);
+
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('deus-theme', next);
+  showToast(next === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode');
+});
+
+// ── Mobile Menu ─────────────────────────────────────────
+document.getElementById('menuBtn').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+  document.body.style.overflow = menu.style.display === 'flex' ? 'hidden' : '';
+});
+function closeMobile() {
+  document.getElementById('mobileMenu').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// ── Toast ───────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(() => t.style.opacity = '0', 2000);
+}
+
+// ── Star Field ──────────────────────────────────────────
+const starField = document.getElementById('starField');
+for (let i = 0; i < 60; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;
+    --d:${2+Math.random()*4}s;--o:${0.2+Math.random()*0.5};
+    animation-delay:${Math.random()*4}s;`;
+  starField.appendChild(star);
+}
+
+// ── Hero Particles ──────────────────────────────────────
+const heroP = document.getElementById('heroParticles');
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.cssText = `left:${Math.random()*100}%;top:${40+Math.random()*40}%;
+    animation-delay:${Math.random()*4}s;animation-duration:${3+Math.random()*3}s;`;
+  heroP.appendChild(p);
+}
+
+// ── GSAP Animations ─────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+window.addEventListener('load', () => {
+  // Hide loader
+  setTimeout(() => {
+    gsap.to('#loader', { opacity: 0, duration: 0.5, onComplete: () => {
+      document.getElementById('loader').style.display = 'none';
+    }});
+  }, 2200);
+
+  // Hero entrance
+  const tl = gsap.timeline({ delay: 2.3 });
+  tl.to('#heroBadge', { opacity:1, y:0, duration:0.6, ease:'back.out(1.7)' })
+    .to('#heroTitle', { opacity:1, y:0, duration:0.8, ease:'back.out(1.4)' }, '-=0.3')
+    .to('#heroSub', { opacity:1, y:0, duration:0.6 }, '-=0.4')
+    .to('#heroDesc', { opacity:1, y:0, duration:0.6 }, '-=0.3')
+    .to('#heroCTAs', { opacity:1, y:0, duration:0.6 }, '-=0.3')
+    .to('#heroTrust', { opacity:1, duration:0.5 }, '-=0.2')
+    .to('#scrollInd', { opacity:1, duration:0.5 }, '-=0.2');
+});
+
+// Section reveals
+gsap.utils.toArray('.section-enter').forEach((el, i) => {
+  gsap.to(el, {
+    scrollTrigger: { trigger:el, start:'top 88%', toggleActions:'play none none reverse' },
+    opacity:1, y:0, duration:0.7, delay:(i%4)*0.1, ease:'power3.out'
+  });
+});
+
+// Nav scroll effect
+ScrollTrigger.create({
+  start: 'top -80',
+  onUpdate: self => {
+    const nav = document.getElementById('mainNav');
+    nav.style.boxShadow = self.progress > 0 ? '0 4px 30px rgba(212,175,55,0.1)' : 'none';
+  }
+});
+
+// ── Share Verse ─────────────────────────────────────────
+function shareVerse() {
+  const text = document.getElementById('verseText').textContent;
+  if (navigator.share) {
+    navigator.share({ title:'DEUS Daily Verse', text, url:window.location.href });
+  } else {
+    navigator.clipboard?.writeText(text);
+    showToast('✝ Verse copied!');
+  }
+}
+
+// ── Feature modal placeholder ───────────────────────────
+function showFeatureModal(feature) {
+  showToast('✦ Unlock with DEUS Premium');
+}
+
+// ── Nav link styles ─────────────────────────────────────
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.style.cssText += 'color:var(--text-muted);transition:color 0.2s;text-decoration:none;';
+  link.addEventListener('mouseenter', () => link.style.color = 'var(--gold)');
+  link.addEventListener('mouseleave', () => link.style.color = 'var(--text-muted)');
+});
+</script>
+</body>
+</html>
